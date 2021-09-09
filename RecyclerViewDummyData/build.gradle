@@ -49,9 +49,6 @@ afterEvaluate {
         publications{
             release(MavenPublication){
                 from components.release
-                groupId = 'com.vishalkumar'
-                artifactId = 'recycler_view_demo_data'
-                version = '1.0.1'
             }
         }
     }
