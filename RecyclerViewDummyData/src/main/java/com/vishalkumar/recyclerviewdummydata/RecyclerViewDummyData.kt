@@ -29,6 +29,33 @@ class RecyclerViewDummyData(private var context: Context) {
         }
     }
 
+    fun setDummyData(
+        recyclerView: RecyclerView,
+        viewResourceId: Int,
+        itemCount: Int = DEFAULT_ITEM_COUNT,
+    ) {
+        try {
+            context.resources.getLayout(viewResourceId)
+            recyclerView.adapter =
+                DummyDataAdapter(context, viewResourceId, itemCount, DEFAULT_ANIMATION_RESOURCE_ID)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    fun setDummyData(
+        recyclerView: RecyclerView,
+        viewResourceId: Int
+    ) {
+        try {
+            context.resources.getLayout(viewResourceId)
+            recyclerView.adapter =
+                DummyDataAdapter(context, viewResourceId, DEFAULT_ITEM_COUNT, DEFAULT_ANIMATION_RESOURCE_ID)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
     private inner class DummyDataAdapter(
         private var context: Context,
         private var viewResourceId: Int,
