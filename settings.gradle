@@ -1,0 +1,3 @@
+include ':RecyclerViewDummyData'
+include ':app'
+rootProject.name = "RecyclerViewApp"
