@@ -35,6 +35,7 @@ Step 3.
      //Fourth(optional) parameter to setDummyData method is the Id of repeating animation
      
         recyclerViewDummyData.setDummyData(recyclerView, R.layout.item_product_dummy)
+	...
         
      //Once data is fetched from server set adapter property of recycler view to orignal adapter
         recyclerView.adapter = productAdapter
