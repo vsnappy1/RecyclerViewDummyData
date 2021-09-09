@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.RecyclerView
 
-class RecyclerViewDummyData(var context: Context) {
+class RecyclerViewDummyData(private var context: Context) {
     companion object {
         private const val DEFAULT_ITEM_COUNT = 6
         private var DEFAULT_ANIMATION_RESOURCE_ID = R.anim.fade_in_fade_out_animation
@@ -29,7 +29,7 @@ class RecyclerViewDummyData(var context: Context) {
         }
     }
 
-    inner class DummyDataAdapter(
+    private inner class DummyDataAdapter(
         private var context: Context,
         private var viewResourceId: Int,
         private var itemCount: Int,
