@@ -67,7 +67,6 @@ Note.
             .build()
 	    
 	    
-	    
         // This create an instance of RecyclerViewDummyData with given dummy layout resource id, custom animation, itemCount as 4 and animation speed as 5
         recyclerViewDummyData = RecyclerViewDummyData.Builder()
             .setDummyViewResourceId(R.layout.item_product_dummy)
