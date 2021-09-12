@@ -1,8 +1,9 @@
 package com.vishal.recyclerviewapp
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.vishalkumar.recyclerviewdummydata.AnimationType
 import com.vishalkumar.recyclerviewdummydata.RecyclerViewDummyData
 import java.util.*
 import kotlin.concurrent.timerTask
@@ -11,25 +12,35 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var productAdapter: ProductAdapter
-    private lateinit var recyclerViewDummyData: RecyclerViewDummyData
+    private var recyclerViewDummyData: RecyclerViewDummyData? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         //Find view by id
         recyclerView = findViewById(R.id.recyclerView)
         //Initialize the real adapter
         productAdapter = ProductAdapter()
-        //Initialize the RecyclerViewDummyData object
-        recyclerViewDummyData = RecyclerViewDummyData(this)
 
-        //sets the dummy data into the recycler view
-        //First parameter to setDummyData method is the RecyclerView
-        //Second parameter to setDummyData method is the Id of the dummy layout
-        //Third(optional, default value is 6) parameter to setDummyData method is the number of items
-        //Fourth(optional) parameter to setDummyData method is the Id of repeating animation
-        recyclerViewDummyData.setDummyData(recyclerView, R.layout.item_product_dummy)
+        // Create an instance of RecyclerViewDummyData with the Builder class
+        recyclerViewDummyData = RecyclerViewDummyData.Builder()
+            // set the dummy layout resource id
+            .setDummyViewResourceId(R.layout.item_product_dummy)
+            // Optional you can use you own custom animation, make sure its repeatCount property is set to infinity
+            .setAnimationResourceId(R.anim.custom_animtion)
+            // Optional you can select between different animation types, default value is AnimationType.FADE_IN_FADE_OUT
+            .setAnimationType(AnimationType.SHIMMER)
+            // Optional you can set it dummy item count, default value is 6
+            .setItemCount(4)
+            // Optional you can set the animation speed, default value is 2.5
+            .setAnimationSpeed(5f)
+            // Optional you can set the shimmer width, default value is 50
+            .setShimmerWidth(70)
+            // This build method builds the RecyclerViewDummyData instance with given configuration
+            .build()
+
+        // This populates the recycler view with dummy data
+        recyclerViewDummyData?.loadDummyData(this, recyclerView)
         fakeNetworkCall()
     }
 
@@ -38,6 +49,6 @@ class MainActivity : AppCompatActivity() {
             runOnUiThread {
                 recyclerView.adapter = productAdapter
             }
-        }, 5000)
+        }, 20000)
     }
 }
