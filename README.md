@@ -53,14 +53,14 @@ Note.
             .build()
 
 
-        // Like above it creates the instance of RecyclerViewDummyData but with SHIMMER as animation Type
+        // This create an instance of RecyclerViewDummyData with given dummy layout resource id and animation type as SHIMMER
         recyclerViewDummyData = RecyclerViewDummyData.Builder()
             .setDummyViewResourceId(R.layout.item_product_dummy)
             .setAnimationType(AnimationType.SHIMMER)
             .build()
 	    
 	    
-        // This create an instance of RecyclerViewDummyData with given dummy layout resource id, and the custom animation
+        // This create an instance of RecyclerViewDummyData with given dummy layout resource id and the custom animation
         recyclerViewDummyData = RecyclerViewDummyData.Builder()
             .setDummyViewResourceId(R.layout.item_product_dummy)
             .setAnimationResourceId(R.anim.custom_animtion)
