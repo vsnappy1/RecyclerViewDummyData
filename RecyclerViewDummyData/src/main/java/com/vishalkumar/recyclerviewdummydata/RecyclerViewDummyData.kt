@@ -14,6 +14,10 @@ import androidx.annotation.AnimRes
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
 
+/*
+Developed by Vishal Kumar on 2021/09/13
+ */
+
 class RecyclerViewDummyData private constructor(
     private val dummyViewResourceId: Int,
     private val itemCount: Int,
@@ -27,7 +31,7 @@ class RecyclerViewDummyData private constructor(
         private val DEFAULT_DUMMY_LAYOUT_RESOURCE_ID = R.layout.default_dummy_layout
         private const val DEFAULT_ITEM_COUNT = 6
         private const val DEFAULT_ANIMATION_SPEED = 2.5f
-        private const val DEFAULT_SHIMMER_HEIGHT_MULTIPLE = 3
+        private const val DEFAULT_SHIMMER_HEIGHT_MULTIPLE = 2
         private const val DEFAULT_SHIMMER_ELEVATION = 0f
         private const val DEFAULT_SHIMMER_ROTATION = 45f
         private const val DEFAULT_SHIMMER_WIDTH = 50
@@ -66,7 +70,6 @@ class RecyclerViewDummyData private constructor(
         private val shimmerWidth: Int
     ) :
         RecyclerView.Adapter<DummyDataAdapter.ViewHolder>() {
-
         private var max: Float = 0.0f
         private var shimmerHeight: Int = 0
         private var animationDuration: Long = 0L
@@ -94,8 +97,7 @@ class RecyclerViewDummyData private constructor(
                 AnimationType.FADE_IN_FADE_OUT -> startFadeAnimation(holder.itemView)
                 AnimationType.SHIMMER -> {
                     /*Since we need to know the size of item before we can add shimmer effect to it therefore
-                        we wait for the item to be loaded and displayed on screen then we start the animation
-                         */
+                      we wait for the item to be loaded and displayed on screen then we start the animation*/
                     holder.itemView.post {
                         startShimmerAnimation(holder.itemView)
                     }
@@ -150,6 +152,11 @@ class RecyclerViewDummyData private constructor(
             val shimmer = getShimmerView()
             shimmer.animation = animation
             group.addView(shimmer)
+            /*Since shimmer is 3 time larger than the view, and if in case the item view height is
+              set to wrap content this will disturb the UI therefor after we add the shimmer in the
+              viewGroup we the the width and height of view group to the original view*/
+            group.layoutParams.width = view.width
+            group.layoutParams.height = view.height
         }
 
         private fun getShimmerView(): View {
@@ -204,7 +211,9 @@ class RecyclerViewDummyData private constructor(
         fun build(): RecyclerViewDummyData? {
             try {
                 when {
-                    animationType == AnimationType.CUSTOM && customAnimationResourceId == -1 -> throw Exception("No custom animation resource id provided")
+                    animationType == AnimationType.CUSTOM && customAnimationResourceId == -1 -> throw Exception(
+                        "No custom animation resource id provided"
+                    )
                     itemCount < 0 -> throw Exception("Item count can not be zero or negative")
                     animationSpeed < 0 -> throw Exception("Shimmer speed can not be zero or negative")
                     shimmerWidth < 0 -> throw Exception("Shimmer width can not be zero or negative")
