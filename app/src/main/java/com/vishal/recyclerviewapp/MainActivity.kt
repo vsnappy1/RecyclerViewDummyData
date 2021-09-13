@@ -24,12 +24,12 @@ class MainActivity : AppCompatActivity() {
 
         // Create an instance of RecyclerViewDummyData with the Builder class
         recyclerViewDummyData = RecyclerViewDummyData.Builder()
-            // set the dummy layout resource id
+            // Set the dummy layout resource id
             .setDummyViewResourceId(R.layout.item_product_dummy)
-            // Optional you can use you own custom animation, make sure its repeatCount property is set to infinity
-            .setAnimationResourceId(R.anim.custom_animtion)
+            // Optional you can use you own custom animation, make sure its repeatCount property is set to infinity & repeatMode property is set to reverse
+            .setCustomAnimationResourceId(R.anim.translate_fade_anim)
             // Optional you can select between different animation types, default value is AnimationType.FADE_IN_FADE_OUT
-            .setAnimationType(AnimationType.SHIMMER)
+            .setAnimationType(AnimationType.CUSTOM)
             // Optional you can set it dummy item count, default value is 6
             .setItemCount(4)
             // Optional you can set the animation speed, default value is 2.5
